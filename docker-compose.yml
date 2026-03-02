@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Vaib@0088
+      MYSQL_DATABASE: employeedb
+    networks:
+      springboot-mysql-net:
+
+  springboot-usermanagement:
+    container_name: springboot-usermanagement
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      springboot-mysql-net:
+    restart: on-failure
+
+networks:
+  springboot-mysql-net:
